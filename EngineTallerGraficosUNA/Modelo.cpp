@@ -42,16 +42,19 @@ GLuint CargarTextura(const std::string& nombreArchivo)
 
 	if (!nombreArchivo.empty())
 	{
+		// Configurar DevIL
 		ILuint imagen = ilGenImage();
 		ilBindImage(imagen);
 		ilEnable(IL_ORIGIN_SET);
 		ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
-		bool exito = ilLoadImage(nombreArchivo.c_str());
+		bool exito = ilLoadImage(nombreArchivo.c_str()) == 1;
 		if (exito)
 		{
+			// Convertir a formato de OpenGL
 			ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 			glGenTextures(1, &resultado);
 			glBindTexture(GL_TEXTURE_2D, resultado);
+			// Enviar imagen
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
 				ilGetInteger(IL_IMAGE_WIDTH),
 				ilGetInteger(IL_IMAGE_HEIGHT),
@@ -71,8 +74,8 @@ Modelo::Modelo(const std::string & nombreOBJ, const ::Shader& shader, const std:
 	using namespace std;
 
 	// Estos vectores son temporales porque se copian a la tarjeta de video, no es necesario mantenerlos en memoria
-	std::vector<VerticeModelo> vertices;
-	std::vector<uint32_t> indices;
+	vector<VerticeModelo> vertices;
+	vector<uint32_t> indices;
 
 	// El formato OBJ tiene cada parte de los vértices en secciones aparte - aquí los juntamos para formar VerticeModelo
 	vector<glm::vec3> posiciones;

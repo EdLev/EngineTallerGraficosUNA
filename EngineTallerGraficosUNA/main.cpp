@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 	// Configurar cámara
 	Camara camara(contexto);
 
-	// Configurar modelo
+	// Configurar modelos
 	Shader shaderModelo("Modelo.vs", "Modelo.fs");
 	Modelo mario("../Modelos/MarioLuigi/mario_obj.obj", shaderModelo, "../Modelos/MarioLuigi/textures/marioD.jpg", "../Modelos/MarioLuigi/textures/marioD.jpg" );
 	Modelo dino("../Modelos/Dino/Full.obj", shaderModelo, "../Modelos/Dino/Diffuse 4096x4096.jpg", "../Modelos/Dino/Normal 4096x4096.jpg");
@@ -42,8 +42,8 @@ int main(int argc, char** argv)
 		{{0.0f, 0.0f, tamañoEjes}, {0.0f, 0.0f, 1.0f}},
 	};
 
-	glDisable(GL_CULL_FACE);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	// Configurar estado de OpenGL
+	// Activar prueba de profundidad
 	glEnable(GL_DEPTH_TEST);
 
 	GLuint VAOEjes;
