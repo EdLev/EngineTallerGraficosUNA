@@ -30,6 +30,7 @@ ContextoGLFW::ContextoGLFW()
 	}
 	glfwMakeContextCurrent(Ventana);
 
+	// Inicializar la librería de manejo de extensiones de OpenGL (GLEW)
 	glewExperimental = GL_TRUE;
 	error = glewInit();
 	if (error != GLEW_OK)
@@ -37,6 +38,7 @@ ContextoGLFW::ContextoGLFW()
 		ManejarError(1, "Fallo al inicializar GLEW");
 	}
 	
+	// Inicializar la librería para cargar imágenes (DevIL)
 	ilInit();
 	iluInit();
 	ilutInit();
@@ -45,12 +47,13 @@ ContextoGLFW::ContextoGLFW()
 	glfwGetFramebufferSize(Ventana, &Ancho, &Alto);
 	glViewport(0, 0, Ancho, Alto);
 
-	// V-Sync
+	// Sincronizar los cuadros por segundo (FPS) de la aplicación con los de la pantalla 
 	glfwSwapInterval(1);
 
 	// Configurar entrada
 	glfwSetKeyCallback(Ventana, ManejarTecla);
 	glfwSetMouseButtonCallback(Ventana, ManejarClick);
+
 	// Desactivar el cursor y capturar el mouse
 	glfwSetInputMode(Ventana, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(Ventana, ManejarPosicionCursor);
