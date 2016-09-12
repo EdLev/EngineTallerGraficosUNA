@@ -5,8 +5,10 @@
 #include <map>
 #include <cassert>
 
+#include<glm/gtc/type_ptr.hpp>
+#include <IL/ilut.h>
+
 #include "ContextoGLFW.h"
-#include "IL/ilut.h"
 
 void SepararLinea(const std::string& linea, const char delimitador, std::vector<std::string>& salida)
 {
@@ -226,6 +228,7 @@ Modelo::Modelo(const std::string & nombreOBJ, const ::Shader& shader, const std:
 
 void Modelo::Dibujar()
 {
+	// Asociar texturas con uniforms en el shader
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, TexturaDifusa);
 	glGenerateMipmap(GL_TEXTURE_2D);
@@ -234,9 +237,11 @@ void Modelo::Dibujar()
 	glBindTexture(GL_TEXTURE_2D, TexturaNormal);
 	glUniform1i(glGetUniformLocation(Shader.Programa, "TexturaNormal"), 1);
 
+	// Asociar matriz de modelo con uniform en el shader
+	glUniformMatrix4fv(glGetUniformLocation(Shader.Programa, "Modelo"), 1, false, glm::value_ptr(ModeloAMundo));
+
+	// Activar VAO
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, NumIndices, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
-
-	GLenum error = glGetError();
 }

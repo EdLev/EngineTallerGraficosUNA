@@ -2,6 +2,7 @@
 
 uniform mat4 Vista;
 uniform mat4 Proyeccion;
+uniform mat4 Modelo;
 
 // Correspondiente a los campos de VerticeModelo
 layout (location = 0) in vec3 Posicion;
@@ -13,7 +14,7 @@ out vec2 CoordTexVertice;
 
 void main()
 {
-	gl_Position = Proyeccion * Vista * vec4(Posicion, 1.0f);
+	gl_Position = Proyeccion * Vista * Modelo * vec4(Posicion, 1.0f);
 	NormalVertice = Normal;
 	CoordTexVertice = CoordTex;
 }

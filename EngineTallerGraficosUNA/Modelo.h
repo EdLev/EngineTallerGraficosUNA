@@ -36,6 +36,8 @@ public:
 
 private:
 
+	glm::mat4 ModeloAMundo;
+
 	size_t NumIndices;
 	GLuint VAO;
 	GLuint TexturaDifusa;
