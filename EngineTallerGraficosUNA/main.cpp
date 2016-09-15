@@ -67,6 +67,7 @@ int main(int argc, char** argv)
 
 		// Simular
 		camara.AplicarMovimiento();
+		camara.ConstruirMatrizVista();
 
 		// Limpiar pantalla
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

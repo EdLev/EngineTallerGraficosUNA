@@ -70,6 +70,7 @@ void ContextoGLFW::ManejarEventos()
 {
 	glfwPollEvents();
 	glfwGetCursorPos(Ventana, &Cursor.X, &Cursor.Y);
+	glfwSetCursorPos(Ventana, Ancho / 2.0f, Alto / 2.0f);
 }
 
 void ContextoGLFW::TerminarCuadro()
@@ -137,7 +138,7 @@ void ContextoGLFW::ManejarPosicionCursor(GLFWwindow * ventana, double x, double 
 
 	for (auto Interfaz : ContextoGlobal->InterfacesEntrada)
 	{
-		if (Interfaz->ManejarPosicionCursor(x, y))
+		if (Interfaz->ManejarPosicionCursor(x - ContextoGlobal->Ancho / 2, y - ContextoGlobal->Alto / 2))
 		{
 			break;
 		}

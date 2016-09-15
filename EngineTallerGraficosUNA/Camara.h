@@ -15,12 +15,18 @@ public:
 	virtual bool ManejarPosicionCursor(double x, double y) override;
 
 	void AplicarMovimiento();
+	void ConstruirMatrizVista();
 	void AplicarMatrices(GLuint ubicacionPrograma);
 
 private:
 
+	glm::vec3 Posicion;
+	glm::vec2 Rotacion; // Solamente soportamos rotación sobre 2 ejes
+
 	float MagnitudVelocidad;
 	glm::vec3 Velocidad;
+
+
 	glm::mat4 Vista;
 	glm::mat4 Proyeccion;
 };
